@@ -1,5 +1,17 @@
-def get_configurator(config_list):
+import argparse
+
+from api.IConfigurator import IConfigurator
+from constants import IngestionConstants
+from impl.config.FileConfigurator import FileConfigurator
+
+
+def get_configurator(args):
     """Load the configurations."""
+
+    if args['type'].upper() == IngestionConstants.file_type:
+        return FileConfigurator()
+    else:
+        return IConfigurator()
     pass
 
 

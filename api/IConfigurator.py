@@ -1,5 +1,5 @@
 class IConfigurator:
-    def get_configuration(self,  config_list):
+    def get_configuration(self,  args):
         """Load the configurations."""
         pass
 
