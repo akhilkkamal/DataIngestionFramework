@@ -3,10 +3,10 @@ class IDestination:
         """Load the configurations."""
         pass
 
-    def write_as_full_load(self, df, config_dict):
+    def write_as_full_load(self,  df, config_dict):
         """Load the configurations."""
         pass
 
-    def write_as_incremental(self, df, config_dict):
+    def write_as_incremental(self,  df, config_dict):
         """Load the configurations."""
         pass

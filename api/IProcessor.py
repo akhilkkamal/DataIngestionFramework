@@ -1,5 +1,5 @@
 class IProcessor:
-    def process(self,  df, config):
+    def process(self, spark, df, config):
         """Load the configurations."""
         pass
 
