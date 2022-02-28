@@ -6,5 +6,5 @@ from api.IValidator import IValidator
 class InputValidator(IValidator):
     def validate(self,spark,  df1, config):
         """Load the configurations."""
-        pass
+        return  df1
 
