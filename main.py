@@ -20,7 +20,7 @@ def execute_ingestion(spark, args):
 
         # Execution
         df = source.read(spark, config)
-        df = validator.validate(spark, df, config)
+        # df = validator.validate(spark, df, config)
         df = processor.process(spark,df, config)
         destination.write(df, config)
     pass

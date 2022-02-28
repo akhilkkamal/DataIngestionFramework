@@ -1,5 +1,5 @@
 class IDestination:
-    def write(self, config_dict):
+    def write(self, df,  config_dict):
         """Load the configurations."""
         pass
 
