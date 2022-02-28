@@ -15,12 +15,14 @@ CONFIG_SOURCE_FILE_TYPE = 'FILE'
 READ_FORMAT = 'read_format'
 READ_PATH = 'read_path'
 READ_OPTIONS = 'read_options'
-READ_TYPE = 'source_type'
+READ_TYPE = 'read_type'
+
 
 #write configs
 WRITE_FORMAT = 'write_format'
 WRITE_PATH = 'write_path'
 WRITE_OPTIONS = 'write_options'
 WRITE_MODE = 'write_mode'
+WRITE_TYPE = 'write_type'
 
 
