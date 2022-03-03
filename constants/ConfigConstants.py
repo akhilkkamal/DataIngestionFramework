@@ -23,7 +23,7 @@ READ_TYPE = 'read_type'
 
 #offset config
 OFFSET_PATH='offset_path'
-
+OFFSET_TYPE = 'offset_type'
 
 #write configs
 WRITE_FORMAT = 'write_format'
