@@ -7,6 +7,10 @@ CONFIG_ID_DELIMITER=","
 
 #General Config
 FILE_TYPE = 'FILE'
+FULL_LOAD = "full_load"
+INCREMENTAL = "incremental"
+INGESTION_TYPE = "ingestion_type"
+
 
 #config sources
 CONFIG_SOURCE_FILE_TYPE = 'FILE'
@@ -16,6 +20,9 @@ READ_FORMAT = 'read_format'
 READ_PATH = 'read_path'
 READ_OPTIONS = 'read_options'
 READ_TYPE = 'read_type'
+
+#offset config
+OFFSET_PATH='offset_path'
 
 
 #write configs

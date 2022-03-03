@@ -4,6 +4,8 @@ from impl.destination.FileDestination import FileDestination
 from impl.processor.AuditColumnEnricher import AuditColumnEnricher
 from impl.source.FileSource import FileSource
 from impl.validate.InputValidator import InputValidator
+from impl.offset.FileOffsetTracker import FileOffsetTracker
+
 from constants import ConfigConstants as CC
 
 def get_configurator(args):
@@ -34,8 +36,9 @@ def get_processor(config):
 
 
 def get_offset_tracker(config):
-    """Load the configurations."""
-    pass
+    if config[CC.OFFSET_TYPE] == CC.FILE_TYPE:
+        return FileOffsetTracker()
+
 
 
 def get_validator(config):
