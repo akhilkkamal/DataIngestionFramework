@@ -1,1 +1,5 @@
 EXTRACT_DT_COLUMN_NAME = 'extract_dttm'
+REGION='us-east-1'
+URL='url'
+USER='username'
+PASSWORD='password'

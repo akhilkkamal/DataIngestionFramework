@@ -19,14 +19,14 @@ def get_configurator(args):
 
 def get_source(config):
     """Load the configurations."""
-    if config[CC.READ_TYPE]:
-        return get_class_instance('impl.source.' + config[CC.READ_TYPE])
+    if config[CC.READ_CONFIG][CC.TYPE]:
+        return get_class_instance('impl.source.' + config[CC.READ_CONFIG][CC.TYPE])
 
 
 def get_destination(config):
     """Load the configurations."""
-    if config[CC.WRITE_TYPE]:
-        return get_class_instance('impl.destination.' + config[CC.WRITE_TYPE])
+    if config[CC.WRITE_CONFIG][CC.TYPE]:
+        return get_class_instance('impl.destination.' + config[CC.WRITE_CONFIG][CC.TYPE])
 
 
 def get_processor(config):
@@ -35,7 +35,7 @@ def get_processor(config):
 
 
 def get_offset_tracker(config):
-    if config[CC.OFFSET_TYPE] == CC.FILE_TYPE:
+    if config[CC.TYPE] == CC.FILE_TYPE:
         return FileOffsetTracker()
 
 

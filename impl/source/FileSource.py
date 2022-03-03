@@ -9,16 +9,17 @@ from factory import IngestionFactory
 class FileSource(ISource):
 
     def read_as_full_load(self, spark, config_dict):
-        read_format = config_dict[CC.READ_FORMAT]
-        read_path = config_dict[CC.READ_PATH]
-        read_options = config_dict[CC.READ_OPTIONS]
+        read_config_dict=config_dict[CC.READ_CONFIG]
+        read_format = read_config_dict[CC.FORMAT]
+        read_path = read_config_dict[CC.PATH]
+        read_options = read_config_dict[CC.OPTIONS]
         return spark.read.options(**read_options).format(read_format).load(read_path)
 
     def read_as_incremental(self, spark, config_dict):
-        self.read_as_full_load(spark, config_dict)
+        return self.read_as_full_load(spark, config_dict)
 
     def read(self, spark: SparkSession, config_dict):
         if config_dict[CC.INGESTION_TYPE] == CC.FULL_LOAD:
-            self.read_as_full_load(spark, config_dict)
+            return self.read_as_full_load(spark, config_dict)
         else:
-            self.read_as_incremental(spark, config_dict)
+            return self.read_as_incremental(spark, config_dict)

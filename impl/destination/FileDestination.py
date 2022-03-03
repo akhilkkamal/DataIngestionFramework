@@ -5,10 +5,11 @@ from constants import ConfigConstants as CC
 
 class FileDestination(IDestination):
     def write(self, df: DataFrame, config_dict):
-        write_mode = config_dict[CC.WRITE_MODE]
-        write_format = config_dict[CC.WRITE_FORMAT]
-        write_path = config_dict[CC.WRITE_PATH]
-        write_options = config_dict[CC.WRITE_OPTIONS]
+        write_config_dict=config_dict[CC.WRITE_CONFIG]
+        write_mode = write_config_dict[CC.MODE]
+        write_format = write_config_dict[CC.FORMAT]
+        write_path = write_config_dict[CC.PATH]
+        write_options = write_config_dict[CC.OPTIONS]
         df.write.options(**write_options).mode(write_mode).format(write_format).save(write_path)
 
     def write_as_full_load(self, df, config_dict):
