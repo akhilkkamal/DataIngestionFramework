@@ -5,29 +5,28 @@ from impl.processor.AuditColumnEnricher import AuditColumnEnricher
 from impl.source.FileSource import FileSource
 from impl.validate.InputValidator import InputValidator
 from impl.offset.FileOffsetTracker import FileOffsetTracker
-
+import importlib
 from constants import ConfigConstants as CC
+
 
 def get_configurator(args):
     """Load the configurations."""
 
-    if args[CC.CONFIG_SOURCE_TYPE].upper() == CC.CONFIG_SOURCE_FILE_TYPE:
-        return FileConfigurator()
-    else:
-        return IConfigurator()
+    if args[CC.CONFIG_SOURCE_TYPE]:
+        return get_class_instance('impl.config.' + args[CC.CONFIG_SOURCE_TYPE])
     pass
 
 
 def get_source(config):
     """Load the configurations."""
-    if config[CC.READ_TYPE] == CC.FILE_TYPE:
-        return FileSource()
+    if config[CC.READ_TYPE]:
+        return get_class_instance('impl.source.' + config[CC.READ_TYPE])
 
 
 def get_destination(config):
     """Load the configurations."""
-    if config[CC.WRITE_TYPE] == CC.FILE_TYPE:
-        return FileDestination()
+    if config[CC.WRITE_TYPE]:
+        return get_class_instance('impl.destination.' + config[CC.WRITE_TYPE])
 
 
 def get_processor(config):
@@ -40,7 +39,14 @@ def get_offset_tracker(config):
         return FileOffsetTracker()
 
 
-
 def get_validator(config):
     """Load the configurations."""
     return InputValidator()
+
+
+def get_class_instance(class_name):
+    module = importlib.import_module(class_name)
+    print(module.__name__)
+    name_array = class_name.split('.')
+    cls = getattr(module, name_array[len(name_array) - 1])
+    return cls()
