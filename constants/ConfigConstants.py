@@ -4,7 +4,7 @@ from impl.source.FileSource import FileSource
 CONFIG_SOURCE_TYPE = 'type'
 CONFIG_ID = 'config_id'
 CONFIG_ID_DELIMITER=","
-REGION='region'
+REGION='us-east-1'
 
 #General Config
 FILE_TYPE = 'FILE'

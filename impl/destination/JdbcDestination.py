@@ -16,7 +16,7 @@ class JdbcDestination(IDestination):
         url = IngestionUtils.get_secret(CC.REGION, write_config_dict[CC.CREDENTIALS], IC.URL)
         username = IngestionUtils.get_secret(CC.REGION, write_config_dict[CC.CREDENTIALS], IC.USER)
         password = IngestionUtils.get_secret(CC.REGION, write_config_dict[CC.CREDENTIALS], IC.PASSWORD)
-        df.write.options(**write_options).mode(write_mode).format(write_format).save(write_path)
+        #df.write.options(**write_options).mode(write_mode).format(write_format).save(write_path)
 
         df.write.format("jdbc"). \
             option("url", url). \
