@@ -7,6 +7,7 @@ from impl.validate.InputValidator import InputValidator
 from impl.offset.FileOffsetTracker import FileOffsetTracker
 import importlib
 from constants import ConfigConstants as CC
+from constants import IngestionConstants as IC
 
 
 def get_configurator(args):
