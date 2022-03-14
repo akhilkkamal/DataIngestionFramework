@@ -16,7 +16,8 @@ PROCESS_NAME = 'process_name'
 SUB_PROCESS_NAME = 'sub_process_name'
 OBJECT_NAME = 'object_name'
 GENERAL_CONFIG = 'general_config'
-
+AUDIT_MESSAGE = 'audit_message'
+STATUS = 'status'
 
 #config sources
 CONFIG_SOURCE_FILE_TYPE = 'FILE'

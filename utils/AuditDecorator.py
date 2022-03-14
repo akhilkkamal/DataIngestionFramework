@@ -12,7 +12,7 @@ class AuditDecorator(object):
         self._count = None
         self._audit_destination = None
         self._audit_status = CC.AUDIT_SUCCESS_STATUS
-        self._audit_message = None
+        self._audit_message = ""
 
     def call(self, ingestion_job):
         def wrapper(spark, context):
@@ -41,7 +41,9 @@ class AuditDecorator(object):
                      CC.AUDIT_END_DT_COLUMN: datetime.fromtimestamp(self._end_time),
                      CC.PROCESS_NAME: process_name,
                      CC.SUB_PROCESS_NAME: sub_process_name,
-                     CC.OBJECT_NAME: object_name
+                     CC.OBJECT_NAME: object_name,
+                     CC.STATUS: self._audit_status,
+                     CC.AUDIT_MESSAGE: self._audit_message
                      }]
 
         log_df = spark.createDataFrame(log_data).coalesce(1)
