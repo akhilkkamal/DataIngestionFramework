@@ -4,6 +4,7 @@ from constants import ConfigConstants as CC
 
 
 class FileConfigurator(IConfigurator):
+
     def get_configuration(self, spark: SparkSession, args):
         df = spark.read.option('multiline', 'true').json(args['path'])
         config_id = args[CC.CONFIG_ID]
@@ -17,3 +18,8 @@ class FileConfigurator(IConfigurator):
         for config in configs:
             config[CC.GENERAL_CONFIG] = general_config_dict
         return configs
+        return df.collect()
+
+    def enrich_general_config(self, config, args):
+        pass
+

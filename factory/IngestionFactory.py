@@ -5,6 +5,7 @@ from impl.offset.FileOffsetTracker import FileOffsetTracker
 from impl.processor.AuditColumnEnricher import AuditColumnEnricher
 
 
+
 def get_configurator(args):
     """Load the configurations."""
 

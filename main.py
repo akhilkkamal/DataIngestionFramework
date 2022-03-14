@@ -23,6 +23,21 @@ def execute_ingestion(arguments, spark):
         executor_with_audit = AuditDecorator().call(execute)
         executor_with_audit(spark, context)
 
+
+def execute_ingestion(spark, args):
+    configurator = IngestionFactory.get_configurator(args)
+    config_list = configurator.get_configuration(spark, args)
+
+    for config in config_list:
+        # Create Instances
+        source = IngestionFactory.get_source(config)
+        processor = IngestionFactory.get_processor(config)
+        destination = IngestionFactory.get_destination(config)
+
+        # Execution
+        df = source.read(spark, config)
+        df = processor.process(spark, df, config)
+        destination.write(df, config)
     pass
 
 
