@@ -16,8 +16,10 @@ def get_configurator(args):
 
 def get_source(context):
     """Load the configurations."""
-    if context.get_config[CC.READ_CONFIG][CC.TYPE]:
-        return get_class_instance('impl.source.' + context.get_config[CC.READ_CONFIG][CC.TYPE])
+    read_configs = context.get_config[CC.READ_CONFIG]
+    sources = [(get_class_instance('impl.source.' + read_config[CC.TYPE]), read_config)
+               for read_config in read_configs]
+    return sources
 
 
 def get_destination(context):

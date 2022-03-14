@@ -9,27 +9,29 @@ class AuditDecorator(object):
     def __init__(self):
         self._start_time = time.time()
         self._end_time = None
-        self._count = None
+        self._count = -1
         self._audit_destination = None
         self._audit_status = CC.AUDIT_SUCCESS_STATUS
         self._audit_message = ""
 
     def call(self, ingestion_job):
-        def wrapper(spark, context):
+        def wrapper(context):
+            spark = context.get_session
             self._audit_destination = IngestionFactory.get_audit_destination(context)
             try:
-                self._count = ingestion_job(spark, context)
+                self._count = ingestion_job(context)
             except Exception as e:
                 self._audit_message = str(e)
                 self._audit_status = CC.AUDIT_FAILURE_STATUS
                 raise e
             finally:
                 self._end_time = time.time()
-                self.write_audit(spark, context)
+                self.write_audit(context)
 
         return wrapper
 
-    def write_audit(self, spark: SparkSession, context):
+    def write_audit(self, context):
+        spark = context.get_session
         audit_id = context.get_args[CC.AUDIT_ID]
         process_name = context.get_args[CC.PROCESS_NAME]
         sub_process_name = context.get_args[CC.SUB_PROCESS_NAME]

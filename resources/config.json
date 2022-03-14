@@ -1,0 +1,42 @@
+[{
+"config_id": "1",
+"ingestion_type":"full_load",
+"read_config":[{
+	"type": "FileSource",
+	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/in/",
+	"format": "csv",
+	"options": {
+		"header": "true",
+		"delimiter": ","
+		}
+	}],
+"write_config":{
+	"type": "FileDestination",
+	"mode": "overwrite",
+	"format": "csv",
+	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/out/",
+	"credentials":"",
+	"options": {
+		"header": "true",
+		"delimiter": "|"
+		}
+	}
+}, {
+"config_id": "2",
+"ingestion_type":"full_load",
+"read_config":[{
+	"type": "FileSource",
+	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/in/",
+	"format": "csv",
+	"options": {
+		"header": "true",
+		"delimiter": ","
+		}
+	}],
+"write_config":{
+	"type": "JdbcDestination",
+	"mode": "overwrite",
+	"path": "akk_test",
+	"credentials":"aws-nvsmdm01-poc"
+	}
+}]

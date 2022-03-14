@@ -1,5 +1,5 @@
 class IProcessor:
-    def process(self, df, context):
+    def process(self, context, *df):
         """Load the configurations."""
         pass
 

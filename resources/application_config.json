@@ -1,0 +1,6 @@
+[{"audit_config":{
+	"type": "JdbcAudit",
+	"mode": "append",
+	"path": "audit_test",
+	"credentials":"aws-nvsmdm01-poc"
+	}}]

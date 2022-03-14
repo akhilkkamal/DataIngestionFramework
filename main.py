@@ -21,36 +21,18 @@ def execute_ingestion(arguments, spark):
         # Execution with auditing enabled
         context = IngestionContext(args, config, spark, logger)
         executor_with_audit = AuditDecorator().call(execute)
-        executor_with_audit(spark, context)
+        executor_with_audit(context)
 
 
-def execute_ingestion(spark, args):
-    configurator = IngestionFactory.get_configurator(args)
-    config_list = configurator.get_configuration(spark, args)
-
-    for config in config_list:
-        # Create Instances
-        source = IngestionFactory.get_source(config)
-        processor = IngestionFactory.get_processor(config)
-        destination = IngestionFactory.get_destination(config)
-
-        # Execution
-        df = source.read(spark, config)
-        df = processor.process(spark, df, config)
-        destination.write(df, config)
-    pass
-
-
-def execute(spark, context: IngestionContext):
+def execute(context: IngestionContext):
     # creating instances
     logger = context.get_logger
     logger.info("ingestion started")
-    source = IngestionFactory.get_source(context)
+    sources = IngestionFactory.get_source(context)
     processor = IngestionFactory.get_processor(context)
     destination = IngestionFactory.get_destination(context)
-
-    df = source.read(context)
-    df = processor.process(df, context)
+    df_array = [source.read(context, read_config) for source, read_config in sources]
+    df = processor.process(context, *df_array)
     destination.write(df, context)
     count = df.count()
     logger.info("ingestion finished count:" + str(count))
