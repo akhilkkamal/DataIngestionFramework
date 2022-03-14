@@ -5,6 +5,6 @@ from pyspark.sql.functions import current_timestamp
 
 
 class AuditColumnEnricher(IProcessor):
-    def process(self,spark,  df, config):
+    def process(self,  df, context):
         return df.withColumn(const.EXTRACT_DT_COLUMN_NAME, current_timestamp())
 

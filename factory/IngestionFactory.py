@@ -1,12 +1,8 @@
-from api.IConfigurator import IConfigurator
-from impl.config.FileConfigurator import FileConfigurator
-from impl.destination.FileDestination import FileDestination
-from impl.processor.AuditColumnEnricher import AuditColumnEnricher
-from impl.source.FileSource import FileSource
-from impl.validate.InputValidator import InputValidator
-from impl.offset.FileOffsetTracker import FileOffsetTracker
 import importlib
+
 from constants import ConfigConstants as CC
+from impl.offset.FileOffsetTracker import FileOffsetTracker
+from impl.processor.AuditColumnEnricher import AuditColumnEnricher
 
 
 def get_configurator(args):
@@ -17,31 +13,33 @@ def get_configurator(args):
     pass
 
 
-def get_source(config):
+def get_source(context):
     """Load the configurations."""
-    if config[CC.READ_CONFIG][CC.TYPE]:
-        return get_class_instance('impl.source.' + config[CC.READ_CONFIG][CC.TYPE])
+    if context.get_config[CC.READ_CONFIG][CC.TYPE]:
+        return get_class_instance('impl.source.' + context.get_config[CC.READ_CONFIG][CC.TYPE])
 
 
-def get_destination(config):
+def get_destination(context):
     """Load the configurations."""
-    if config[CC.WRITE_CONFIG][CC.TYPE]:
-        return get_class_instance('impl.destination.' + config[CC.WRITE_CONFIG][CC.TYPE])
+
+    if context.get_config[CC.WRITE_CONFIG][CC.TYPE]:
+        return get_class_instance('impl.destination.' + context.get_config[CC.WRITE_CONFIG][CC.TYPE])
 
 
-def get_processor(config):
+def get_audit_destination(context):
+    """Load the configurations."""
+    if context.get_config[CC.GENERAL_CONFIG][CC.AUDIT_CONFIG][CC.TYPE]:
+        return get_class_instance('impl.audit.' + context.get_config[CC.GENERAL_CONFIG][CC.AUDIT_CONFIG][CC.TYPE])
+
+
+def get_processor(context):
     """Load the configurations."""
     return AuditColumnEnricher()
 
 
-def get_offset_tracker(config):
-    if config[CC.TYPE] == CC.FILE_TYPE:
+def get_offset_tracker(context):
+    if context.get_config[CC.TYPE] == CC.FILE_TYPE:
         return FileOffsetTracker()
-
-
-def get_validator(config):
-    """Load the configurations."""
-    return InputValidator()
 
 
 def get_class_instance(class_name):

@@ -1,12 +1,12 @@
 class ISource:
-    def read(self, spark, config_dict):
+    def read(self, context):
         """Load the configurations."""
         pass
 
-    def read_as_full_load(self, spark,config_dict):
+    def read_as_full_load(self, context):
         """Load the configurations."""
         pass
 
-    def read_as_incremental(self,spark, config_dict):
+    def read_as_incremental(self, context):
         """Load the configurations."""
         pass
