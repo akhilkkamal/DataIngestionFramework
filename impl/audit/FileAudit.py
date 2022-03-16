@@ -5,12 +5,13 @@ from constants import ConfigConstants as CC
 
 
 class FileAudit(IAudit, FileDestination):
-    def write(self, df, context):
-        FileDestination.write_with_config(self, df, context.get_config[CC.GENERAL_CONFIG][CC.AUDIT_CONFIG])
+    def __init__(self, context):
 
+        audit_config_dict = context.get_config[CC.GENERAL_CONFIG][CC.AUDIT_CONFIG]
+        self._write_mode = audit_config_dict[CC.MODE]
+        self._write_format = audit_config_dict[CC.FORMAT]
+        self._write_path = audit_config_dict[CC.PATH]
+        self._write_options = audit_config_dict[CC.OPTIONS]
 
-class FileAudit(IAudit):
-    def audit_log(self,  df,  config_dict, start_time, end_time, audit_id, process_name, message, status):
-        """Audit logging"""
-        pass
-
+    def write(self, df):
+        FileDestination.write(self, df)

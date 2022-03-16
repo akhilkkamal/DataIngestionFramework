@@ -1,6 +1,5 @@
 [{
 "config_id": "1",
-"ingestion_type":"full_load",
 "read_config":[{
 	"type": "FileSource",
 	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/in/",
@@ -10,6 +9,9 @@
 		"delimiter": ","
 		}
 	}],
+"processor_config":{
+	"type" : "ExtractDateEnrichProcessor"
+},
 "write_config":{
 	"type": "FileDestination",
 	"mode": "overwrite",
@@ -23,7 +25,6 @@
 	}
 }, {
 "config_id": "2",
-"ingestion_type":"full_load",
 "read_config":[{
 	"type": "FileSource",
 	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/in/",

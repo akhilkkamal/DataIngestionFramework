@@ -2,7 +2,7 @@
 
 CONFIG_SOURCE_TYPE = 'type'
 CONFIG_ID = 'config_id'
-CONFIG_ID_DELIMITER=","
+DELIMITER = ","
 
 #General Config
 FILE_TYPE = 'FILE'
@@ -18,6 +18,10 @@ OBJECT_NAME = 'object_name'
 GENERAL_CONFIG = 'general_config'
 AUDIT_MESSAGE = 'audit_message'
 STATUS = 'status'
+PARTITION_COLUMNS = 'partition_columns'
+PROCESSOR_CONFIG = 'processor_config'
+PROJECT_CONFIG_PATH = 'project_config_path'
+JOB_CONFIG_PATH = 'job_config_path'
 
 #config sources
 CONFIG_SOURCE_FILE_TYPE = 'FILE'

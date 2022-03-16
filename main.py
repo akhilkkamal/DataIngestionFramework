@@ -8,20 +8,20 @@ from pyspark.context import SparkContext
 from context.IngestionContext import IngestionContext
 from factory import IngestionFactory
 from utils.AuditDecorator import AuditDecorator
-from utils.Logging import Log4j
+from utils.Logging import Logging
 
 
 def execute_ingestion(arguments, spark):
     # Get Configurator
-    configurator = IngestionFactory.get_configurator(arguments)
-    config_list = configurator.get_configuration(spark, arguments)
-    logger = Log4j(spark)
+    configurator = IngestionFactory.get_configurator(arguments, spark)
+    config_list = configurator.get_configuration()
+    logger = Logging(spark)
 
     for config in config_list:
         # Execution with auditing enabled
         context = IngestionContext(args, config, spark, logger)
-        executor_with_audit = AuditDecorator().call(execute)
-        executor_with_audit(context)
+        executor_with_audit = AuditDecorator(context).call(execute)
+        executor_with_audit()
 
 
 def execute(context: IngestionContext):
@@ -31,9 +31,9 @@ def execute(context: IngestionContext):
     sources = IngestionFactory.get_source(context)
     processor = IngestionFactory.get_processor(context)
     destination = IngestionFactory.get_destination(context)
-    df_array = [source.read(context, read_config) for source, read_config in sources]
-    df = processor.process(context, *df_array)
-    destination.write(df, context)
+    df_array = [source.read() for source in sources]
+    df = processor.process(*df_array)
+    destination.write(df)
     count = df.count()
     logger.info("ingestion finished count:" + str(count))
 
@@ -42,8 +42,8 @@ def execute(context: IngestionContext):
 
 # @params: [JOB_NAME]
 args = getResolvedOptions(sys.argv,
-                          ['JOB_NAME', 'type', 'path', 'config_id', 'process_name',
-                           'sub_process_name', 'object_name', 'application_path', 'audit_id'])
+                          ['JOB_NAME', 'type', 'job_config_path', 'config_id', 'process_name',
+                           'sub_process_name', 'object_name', 'project_config_path', 'audit_id'])
 sc = SparkContext()
 glue_context = GlueContext(sc)
 session = glue_context.spark_session
