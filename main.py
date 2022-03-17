@@ -7,7 +7,7 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from context.IngestionContext import IngestionContext
 from factory import IngestionFactory
-from utils.AuditDecorator import AuditDecorator
+from utils.JobRunner import JobRunner
 from utils.Logging import Logging
 
 
@@ -20,7 +20,7 @@ def execute_ingestion(arguments, spark):
     for config in config_list:
         # Execution with auditing enabled
         context = IngestionContext(args, config, spark, logger)
-        executor_with_audit = AuditDecorator(context).call(execute)
+        executor_with_audit = JobRunner(context).call(execute)
         executor_with_audit()
 
 

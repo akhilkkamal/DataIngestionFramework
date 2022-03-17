@@ -4,7 +4,7 @@ from constants import ConfigConstants as CC
 from factory import IngestionFactory
 
 
-class AuditDecorator:
+class JobRunner:
     def __init__(self, context):
         self._context = context
         self._spark = context.get_session
