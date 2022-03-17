@@ -1,6 +1,6 @@
 from factory import IngestionFactory
 
-class Logging(object):
+class Logger(object):
     """Wrapper class for Log4j JVM object.
     :param spark: SparkSession object.
     """

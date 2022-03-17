@@ -7,15 +7,15 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from context.IngestionContext import IngestionContext
 from factory import IngestionFactory
-from utils.JobRunner import JobRunner
-from utils.Logging import Logging
+from handler.JobRunner import JobRunner
+from utils.Logger import Logger
 
 
 def execute_ingestion(arguments, spark):
     # Get Configurator
     configurator = IngestionFactory.get_configurator(arguments, spark)
     config_list = configurator.get_configuration()
-    logger = Logging(spark)
+    logger = Logger(spark)
 
     for config in config_list:
         # Execution with auditing enabled
