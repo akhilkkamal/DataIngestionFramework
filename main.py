@@ -53,3 +53,12 @@ job.init(args['JOB_NAME'], args)
 execute_ingestion(args, session)
 
 job.commit()
+
+# TODO: For Streamsets 
+# @params: [JOB_NAME]
+# args = {'JOB_NAME': '${JOB_NAME}', 'type': '${type}', 'path': '${path}', 'config_id': '${config_id}',
+#         'process_name': '${process_name}', 'sub_process_name': '${sub_process_name}',
+#         'object_name': '${object_name}', 'application_path': '${application_path}',
+#         'audit_id': '${audit_id}'}
+# 
+# execute_ingestion(args, spark)
