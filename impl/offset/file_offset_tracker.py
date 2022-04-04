@@ -1,5 +1,5 @@
-from api.IOffsetTracker import IOffsetTracker
-from constants import ConfigConstants as CC
+from api.offset_tracker import IOffsetTracker
+from constants import config_constants as CC
 
 
 class FileOffsetTracker(IOffsetTracker):

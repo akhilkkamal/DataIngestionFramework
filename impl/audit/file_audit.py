@@ -1,7 +1,7 @@
-from api.IAudit import IAudit
+from api.audit import IAudit
 
-from impl.destination.FileDestination import FileDestination
-from constants import ConfigConstants as CC
+from impl.destination.file_destination import FileDestination
+from constants import config_constants as CC
 
 
 class FileAudit(IAudit, FileDestination):

@@ -1,4 +1,4 @@
-from factory import IngestionFactory
+from factory import ingestion_factory
 
 class Logger(object):
     """Wrapper class for Log4j JVM object.

@@ -1,6 +1,6 @@
-from api.IDestination import IDestination
+from api.destination import IDestination
 from pyspark.sql import DataFrame
-from constants import ConfigConstants as CC
+from constants import config_constants as CC
 
 
 class FileDestination(IDestination):

@@ -1,8 +1,8 @@
-from api.IAudit import IAudit
-from impl.destination.JdbcDestination import JdbcDestination
-from constants import ConfigConstants as CC
-from utils import IngestionUtils
-from constants import IngestionConstants as IC
+from api.audit import IAudit
+from impl.destination.jdbc_destination import JdbcDestination
+from constants import config_constants as CC
+from utils import ingestion_utils
+from constants import ingestion_constants as IC
 
 
 class JdbcAudit(IAudit, JdbcDestination):

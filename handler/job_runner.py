@@ -1,7 +1,7 @@
 import time
 from datetime import datetime
-from constants import ConfigConstants as CC
-from factory import IngestionFactory
+from constants import config_constants as CC
+from factory import ingestion_factory
 
 
 class JobRunner:

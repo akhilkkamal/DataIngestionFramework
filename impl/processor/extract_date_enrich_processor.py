@@ -1,5 +1,5 @@
-from api.IProcessor import IProcessor
-import constants.IngestionConstants as const
+from api.processor import IProcessor
+import constants.ingestion_constants as const
 from pyspark.sql.functions import current_timestamp
 
 

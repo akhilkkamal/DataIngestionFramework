@@ -1,7 +1,7 @@
 import importlib
 
-from constants import ConfigConstants as CC
-from impl.offset.FileOffsetTracker import FileOffsetTracker
+from constants import config_constants as CC
+from impl.offset.file_offset_tracker import FileOffsetTracker
 
 
 def get_configurator(args, spark):

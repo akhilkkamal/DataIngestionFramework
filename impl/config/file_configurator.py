@@ -1,6 +1,6 @@
-from api.IConfigurator import IConfigurator
+from api.configurator import IConfigurator
 from pyspark.sql import SparkSession
-from constants import ConfigConstants as CC
+from constants import config_constants as CC
 
 
 class FileConfigurator(IConfigurator):

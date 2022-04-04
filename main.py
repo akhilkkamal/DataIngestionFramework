@@ -5,9 +5,9 @@ from awsglue.job import Job
 from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
-from context.IngestionContext import IngestionContext
-from factory import IngestionFactory
-from handler.JobRunner import JobRunner
+from context.ingestion_context import IngestionContext
+from factory import ingestion_factory as IngestionFactory
+from handler.job_runner import JobRunner
 from utils.Logger import Logger
 
 

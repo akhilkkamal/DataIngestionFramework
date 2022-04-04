@@ -1,5 +1,5 @@
-from api.ISource import ISource
-from constants import ConfigConstants as CC
+from api.source import ISource
+from constants import config_constants as CC
 
 
 class FileSource(ISource):
