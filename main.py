@@ -8,7 +8,7 @@ from pyspark.context import SparkContext
 from context.ingestion_context import IngestionContext
 from factory import ingestion_factory as IngestionFactory
 from handler.job_runner import JobRunner
-from utils.Logger import Logger
+from utils.logger import Logger
 
 
 def execute_ingestion(arguments, spark):

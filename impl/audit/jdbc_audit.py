@@ -1,7 +1,7 @@
 from api.audit import IAudit
 from impl.destination.jdbc_destination import JdbcDestination
 from constants import config_constants as CC
-from utils import ingestion_utils
+from utils import ingestion_utils as IngestionUtils
 from constants import ingestion_constants as IC
 
 

@@ -2,7 +2,7 @@ from api.destination import IDestination
 from pyspark.sql import DataFrame
 from constants import config_constants as CC
 from constants import ingestion_constants as IC
-from utils import ingestion_utils
+from utils import ingestion_utils as IngestionUtils
 
 
 class JdbcDestination(IDestination):
