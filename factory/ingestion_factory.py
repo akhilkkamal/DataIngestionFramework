@@ -1,6 +1,7 @@
 import importlib
 
 from constants import config_constants as CC
+from context.ingestion_context import IngestionContext
 from impl.offset.file_offset_tracker import FileOffsetTracker
 
 
@@ -29,13 +30,17 @@ def get_audit_destination(context):
                                   context.get_config[CC.GENERAL_CONFIG][CC.AUDIT_CONFIG][CC.TYPE])(context)
 
 
-def get_processor(context):
+def get_processor(context: IngestionContext):
     """Load the configurations."""
+
     if CC.PROCESSOR_CONFIG in context.get_config:
+        logger = context.get_logger
+        logger.error(str(context.get_config[CC.PROCESSOR_CONFIG]))
+        logger.error("impl.processor." + context.get_config[CC.PROCESSOR_CONFIG][CC.TYPE])
         return get_class_instance('impl.processor.' +
                                   context.get_config[CC.PROCESSOR_CONFIG][CC.TYPE])(context)
     else:
-        return get_class_instance('impl.processor.identityProcessor')(context)
+        return get_class_instance('impl.processor.identity_processor.IdentityProcessor')(context)
 
 
 def get_offset_tracker(context):
@@ -44,8 +49,9 @@ def get_offset_tracker(context):
 
 
 def get_class_instance(class_name):
-    module = importlib.import_module(class_name)
-    print(module.__name__)
     name_array = class_name.split('.')
+    module_name = name_array[:(len(name_array) - 1)]
+    module = importlib.import_module(".".join(module_name))
+    print(module.__name__)
     cls = getattr(module, name_array[len(name_array) - 1])
     return cls

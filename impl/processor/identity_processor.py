@@ -1,9 +1,9 @@
 from api.processor import IProcessor
 
 
-class ExtractDateEnrichProcessor(IProcessor):
+class IdentityProcessor(IProcessor):
     def __init__(self, context):
-        pass
+        self._context = context
 
     def process(self, *df):
         return df[0]

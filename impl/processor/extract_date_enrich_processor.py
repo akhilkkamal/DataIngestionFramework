@@ -5,7 +5,7 @@ from pyspark.sql.functions import current_timestamp
 
 class ExtractDateEnrichProcessor(IProcessor):
     def __init__(self, context):
-        pass
+        self._context = context
 
     def process(self, *df):
         base_df = df[0]
