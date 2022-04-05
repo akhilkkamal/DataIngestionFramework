@@ -33,7 +33,7 @@ def get_audit_destination(context):
 def get_processor(context: IngestionContext):
     """Load the configurations."""
 
-    if CC.PROCESSOR_CONFIG in context.get_config:
+    if CC.PROCESSOR_CONFIG in context.get_config and context.get_config[CC.PROCESSOR_CONFIG] is not None:
         logger = context.get_logger
         logger.error(str(context.get_config[CC.PROCESSOR_CONFIG]))
         logger.error("impl.processor." + context.get_config[CC.PROCESSOR_CONFIG][CC.TYPE])

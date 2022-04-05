@@ -1,7 +1,7 @@
 [{
 "config_id": "1",
 "read_config":[{
-	"type": "FileSource",
+	"type": "file_source.FileSource",
 	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/in/",
 	"format": "csv",
 	"options": {
@@ -10,10 +10,10 @@
 		}
 	}],
 "processor_config":{
-	"type" : "ExtractDateEnrichProcessor"
+	"type" : "extract_date_enrich_processor.ExtractDateEnrichProcessor"
 },
 "write_config":{
-	"type": "FileDestination",
+	"type": "file_destination.FileDestination",
 	"mode": "overwrite",
 	"format": "csv",
 	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/out/",
@@ -26,7 +26,7 @@
 }, {
 "config_id": "2",
 "read_config":[{
-	"type": "FileSource",
+	"type": "file_source.FileSource",
 	"path": "s3://aws-glue-assets-426709107224-us-east-1/test_script/in/",
 	"format": "csv",
 	"options": {
@@ -35,7 +35,7 @@
 		}
 	}],
 "write_config":{
-	"type": "JdbcDestination",
+	"type": "jdbc_destination.JdbcDestination",
 	"mode": "overwrite",
 	"path": "akk_test",
 	"credentials":"aws-nvsmdm01-poc"
