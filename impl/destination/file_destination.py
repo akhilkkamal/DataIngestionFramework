@@ -14,6 +14,9 @@ class FileDestination(IDestination):
         self._write_options = write_config_dict[CC.OPTIONS]
         if CC.PARTITION_COLUMNS in write_config_dict:
             self._partition_column = write_config_dict[CC.PARTITION_COLUMNS]
+        else:
+            self._partition_column = None
+
 
     def write(self, df: DataFrame):
         if self._partition_column:

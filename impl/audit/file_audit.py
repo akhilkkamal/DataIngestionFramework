@@ -12,6 +12,10 @@ class FileAudit(IAudit, FileDestination):
         self._write_format = audit_config_dict[CC.FORMAT]
         self._write_path = audit_config_dict[CC.PATH]
         self._write_options = audit_config_dict[CC.OPTIONS]
+        if CC.PARTITION_COLUMNS in audit_config_dict:
+            self._partition_column = audit_config_dict[CC.PARTITION_COLUMNS]
+        else:
+            self._partition_column = None
 
     def write(self, df):
         FileDestination.write(self, df)

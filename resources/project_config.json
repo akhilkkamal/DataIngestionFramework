@@ -1,6 +1,10 @@
 [{"audit_config":{
-	"type": "jdbc_audit.JdbcAudit",
+	"type": "file_audit.FileAudit",
+	"format": "csv",
 	"mode": "append",
-	"path": "audit_test",
-	"credentials":"aws-nvsmdm01-poc"
+	"path": "file:///C:\\\\Users/user_name/DataIngestionFramework/resources/project_name/",
+	"options": {
+		"header": "true",
+		"delimiter": ","
+		}
 	}}]

@@ -40,4 +40,20 @@
 	"path": "akk_test",
 	"credentials":"aws-nvsmdm01-poc"
 	}
+},
+	{
+"config_id": "3",
+"read_config":[{
+	"type": "file_source.FileSource",
+	"path": "file:///C:\\\\Users/user_name/DataIngestionFramework/resources/project/file_name.csv",
+	"format": "csv",
+	"options": {
+		"header": "true",
+		"delimiter": ","
+		}
+	}
+],
+"write_config":{
+	"type": "console_destination.ConsoleDestination"
+	}
 }]

@@ -5,7 +5,6 @@ class Logger(object):
     """
 
     def __init__(self, spark):
-        print('Creating new instance')
         app_id = spark.sparkContext.getConf().get('spark.app.id')
         app_name = spark.sparkContext.getConf().get('spark.app.name')
 

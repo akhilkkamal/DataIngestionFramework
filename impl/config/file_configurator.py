@@ -13,7 +13,7 @@ class FileConfigurator(IConfigurator):
 
     def get_configuration(self):
         df = self._spark.read.option('multiline', 'true').json(self._job_config_path)
-        df = df.filter(df.config_id.isin(self._config_id.split(CC.DELIMITER))). \
+        df = df.filter(df.config_id.isin(self._config_id.split(CC.DELIMITER))).\
             rdd.map(lambda row: row.asDict(True))
         return self.enrich_general_configuration(df.collect())
 

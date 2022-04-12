@@ -52,6 +52,5 @@ def get_class_instance(class_name):
     name_array = class_name.split('.')
     module_name = name_array[:(len(name_array) - 1)]
     module = importlib.import_module(".".join(module_name))
-    print(module.__name__)
     cls = getattr(module, name_array[len(name_array) - 1])
     return cls

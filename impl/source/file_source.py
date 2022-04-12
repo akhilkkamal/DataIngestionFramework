@@ -11,6 +11,7 @@ class FileSource(ISource):
         self._read_options = read_config[CC.OPTIONS]
 
     def read(self):
+
         return self._spark.read. \
             options(**self._read_options). \
             format(self._read_format). \
