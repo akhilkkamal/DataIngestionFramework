@@ -1,14 +1,14 @@
+import os
 import sys
 
-from awsglue.context import GlueContext
-from awsglue.job import Job
-from awsglue.transforms import *
-from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
+from pyspark.sql import SparkSession
+
 from context.ingestion_context import IngestionContext
 from factory import ingestion_factory as IngestionFactory
 from handler.job_runner import JobRunner
 from utils.logger import Logger
+import argparse
 
 
 def execute_ingestion(arguments, spark):
@@ -41,24 +41,10 @@ def execute(context: IngestionContext):
 
 
 # @params: [JOB_NAME]
-args = getResolvedOptions(sys.argv,
-                          ['JOB_NAME', 'type', 'job_config_path', 'config_id', 'process_name',
-                           'sub_process_name', 'object_name', 'project_config_path', 'audit_id'])
-sc = SparkContext()
-glue_context = GlueContext(sc)
-session = glue_context.spark_session
-job = Job(glue_context)
-job.init(args['JOB_NAME'], args)
+args = {'JOB_NAME': '${JOB_NAME}', 'type': '${type}', 'project_config_path': '${project_config_path}', 'config_id': '${config_id}',
+        'process_name': '${process_name}', 'sub_process_name': '${sub_process_name}',
+        'object_name': '${object_name}', 'application_path': '${application_path}',
+        'audit_id': '${audit_id}','job_config_path':'${job_config_path}'}
 
-execute_ingestion(args, session)
+execute_ingestion(args, spark)
 
-job.commit()
-
-# TODO: For Streamsets 
-# @params: [JOB_NAME]
-# args = {'JOB_NAME': '${JOB_NAME}', 'type': '${type}', 'path': '${path}', 'config_id': '${config_id}',
-#         'process_name': '${process_name}', 'sub_process_name': '${sub_process_name}',
-#         'object_name': '${object_name}', 'application_path': '${application_path}',
-#         'audit_id': '${audit_id}'}
-# 
-# execute_ingestion(args, spark)
