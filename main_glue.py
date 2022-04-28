@@ -40,17 +40,19 @@ def execute(context: IngestionContext):
     return count
 
 
-# @params: [JOB_NAME]
-args = getResolvedOptions(sys.argv,
-                          ['JOB_NAME', 'type', 'job_config_path', 'config_id', 'process_name',
-                           'sub_process_name', 'object_name', 'project_config_path', 'audit_id'])
-sc = SparkContext()
-glue_context = GlueContext(sc)
-session = glue_context.spark_session
-job = Job(glue_context)
-job.init(args['JOB_NAME'], args)
+def main():
+    # @params: [JOB_NAME]
+    args = getResolvedOptions(sys.argv,
+                              ['JOB_NAME', 'type', 'job_config_path', 'config_id', 'process_name',
+                               'sub_process_name', 'object_name', 'project_config_path', 'audit_id'])
+    sc = SparkContext()
+    glue_context = GlueContext(sc)
+    session = glue_context.spark_session
+    job = Job(glue_context)
+    job.init(args['JOB_NAME'], args)
+    execute_ingestion(args, session)
+    job.commit()
 
-execute_ingestion(args, session)
 
-job.commit()
-
+if __name__ == '__main__':
+    main()

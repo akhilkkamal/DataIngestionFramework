@@ -68,7 +68,6 @@ def main():
         builder. \
         master("local[*]"). \
         appName(args['JOB_NAME']). \
-        config("spark.sql.mapKeyDedupPolicy", "LAST_WIN"). \
         getOrCreate()
     execute_ingestion(args, session)
 
